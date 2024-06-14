@@ -5,7 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/nixzhu/Ananda.git",
       "state" : {
-        "revision" : "ca4d4dc97e6518305d92813af2588599a6118484"
+        "revision" : "4e99086195080495965c6a9d46a4a442c2fbade9",
+        "version" : "0.9.0"
       }
     },
     {
