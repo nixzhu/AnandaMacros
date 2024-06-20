@@ -1,4 +1,4 @@
-// swift-tools-version: 5.9
+// swift-tools-version: 5.10
 
 import PackageDescription
 import CompilerPluginSupport
@@ -22,11 +22,11 @@ let package = Package(
     dependencies: [
         .package(
             url: "https://github.com/nixzhu/Ananda.git",
-            from: "0.9.0"
+            from: "0.9.2"
         ),
         .package(
             url: "https://github.com/apple/swift-syntax.git",
-            "509.0.0"..<"511.0.0"
+            "510.0.0"..<"601.0.0"
         ),
     ],
     targets: [

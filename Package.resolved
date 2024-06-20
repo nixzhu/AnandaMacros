@@ -1,12 +1,13 @@
 {
+  "originHash" : "f949c1d321e79ce2884f677b2d9c037c54949f26c7f2737b3c7c6886171c5081",
   "pins" : [
     {
       "identity" : "ananda",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/nixzhu/Ananda.git",
       "state" : {
-        "revision" : "4e99086195080495965c6a9d46a4a442c2fbade9",
-        "version" : "0.9.0"
+        "revision" : "f8198a7bca7c39fd0d783beaaaa7886303856d59",
+        "version" : "0.9.2"
       }
     },
     {
@@ -37,5 +38,5 @@
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }

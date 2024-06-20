@@ -41,7 +41,6 @@ public struct AnandaInitMacro: MemberMacro {
 
         let variableDecls = members.compactMap { $0.decl.as(VariableDeclSyntax.self) }
 
-        #if canImport(SwiftSyntax510)
         let list = variableDecls
             .filter {
                 $0.bindings.first?.accessorBlock == nil &&
@@ -71,38 +70,6 @@ public struct AnandaInitMacro: MemberMacro {
 
                 return (key ?? name.description, name, type)
             }
-        #else
-        let list = variableDecls
-            .filter {
-                $0.bindings.first?.accessorBlock == nil &&
-                    $0.attributes.first?.as(AttributeSyntax.self)?
-                    .attributeName.description != "AnandaIgnored"
-            }
-            .map {
-                (
-                    $0.attributes.first?.as(AttributeSyntax.self)?
-                        .attributeName.description == "AnandaKey"
-                        ? $0.attributes.first?.as(AttributeSyntax.self)?
-                            .arguments?.as(LabeledExprListSyntax.self)?.first?
-                            .as(LabeledExprSyntax.self)?.expression
-                            .as(StringLiteralExprSyntax.self)?.segments.first?.description
-                        : nil,
-                    $0.bindings.first?.pattern,
-                    $0.bindings.first?.typeAnnotation?.type
-                )
-            }
-            .compactMap { key, name, type -> (String, PatternSyntax, TypeSyntax)? in
-                guard let name else {
-                    return nil
-                }
-
-                guard let type else {
-                    return nil
-                }
-
-                return (key ?? name.description, name, type)
-            }
-        #endif
 
         let initializer = try InitializerDeclSyntax(
             .init(stringLiteral: "\(accessModifierHead)init(json: AnandaJSON)")
