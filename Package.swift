@@ -22,7 +22,7 @@ let package = Package(
     dependencies: [
         .package(
             url: "https://github.com/nixzhu/Ananda.git",
-            from: "0.9.2"
+            from: "0.9.5"
         ),
         .package(
             url: "https://github.com/apple/swift-syntax.git",
