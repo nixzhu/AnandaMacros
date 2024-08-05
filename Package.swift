@@ -25,7 +25,7 @@ let package = Package(
             from: "0.9.5"
         ),
         .package(
-            url: "https://github.com/apple/swift-syntax.git",
+            url: "https://github.com/swiftlang/swift-syntax.git",
             "510.0.0"..<"601.0.0"
         ),
     ],
