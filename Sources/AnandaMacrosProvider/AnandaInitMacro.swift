@@ -74,6 +74,8 @@ public struct AnandaInitMacro: MemberMacro {
         let initializer = try InitializerDeclSyntax(
             .init(stringLiteral: "\(accessModifierHead)init(json: AnandaJSON)")
         ) {
+            ExprSyntax("\n    let json = json.withValueExtractor(Self.valueExtractor)")
+
             for (key, name, type) in list {
                 ExprSyntax("self.\(name) = \(raw: type.ananda(key: key))")
             }

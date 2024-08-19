@@ -62,6 +62,7 @@ final class MacrosTests: XCTestCase {
                         let b12: [[String: [Int]]]?
 
                         init(json: AnandaJSON) {
+                            let json = json.withValueExtractor(Self.valueExtractor)
                             self.b1 = json["b1"].int()
                             self.b2 = json["b2"].int
                             self.b3 = json["b3"].array().map {
@@ -131,6 +132,7 @@ final class MacrosTests: XCTestCase {
                     let c12: [[String: [Bob]]]?
 
                     init(json: AnandaJSON) {
+                        let json = json.withValueExtractor(Self.valueExtractor)
                         self.avatarURL = json["avatar_url"].url()
                         self.a1 = json["a1"].bool()
                         self.a2 = json["a2"].bool
@@ -204,7 +206,7 @@ final class MacrosTests: XCTestCase {
         assertMacroExpansion(
             """
             @AnandaInit
-            public struct IDs: APICodable {
+            public struct IDs: AnandaModel {
                 public var id: Int { trakt }
 
                 public let trakt: Int
@@ -218,7 +220,7 @@ final class MacrosTests: XCTestCase {
             }
             """,
             expandedSource: """
-                public struct IDs: APICodable {
+                public struct IDs: AnandaModel {
                     public var id: Int { trakt }
 
                     public let trakt: Int
@@ -229,6 +231,7 @@ final class MacrosTests: XCTestCase {
                     public var poster: URL?
 
                     public init(json: AnandaJSON) {
+                        let json = json.withValueExtractor(Self.valueExtractor)
                         self.trakt = json["trakt"].int()
                         self.slug = json["slug"].string
                         self.tvdb = json["tvdb"].int
@@ -317,10 +320,8 @@ public struct World: AnandaModel {
     public let companies: [String: Company]
 }
 
-public protocol APICodable {}
-
 @AnandaInit
-public struct IDs: APICodable {
+public struct IDs: AnandaModel {
     public var id: Int { trakt }
 
     public let trakt: Int
