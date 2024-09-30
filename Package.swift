@@ -22,7 +22,7 @@ let package = Package(
     dependencies: [
         .package(
             url: "https://github.com/nixzhu/Ananda.git",
-            from: "0.10.0"
+            from: "0.10.1"
         ),
         .package(
             url: "https://github.com/swiftlang/swift-syntax.git",
@@ -60,6 +60,7 @@ let package = Package(
             name: "AnandaMacrosTests",
             dependencies: [
                 "AnandaMacros",
+                "AnandaMacrosProvider",
                 .product(
                     name: "SwiftSyntaxMacrosTestSupport",
                     package: "swift-syntax"
