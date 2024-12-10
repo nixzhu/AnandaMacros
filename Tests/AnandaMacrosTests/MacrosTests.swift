@@ -1,11 +1,12 @@
-import XCTest
+import Foundation
+import Testing
 import SwiftSyntaxMacrosTestSupport
 import Ananda
 @testable import AnandaMacros
 @testable import AnandaMacrosProvider
 
-final class MacrosTests: XCTestCase {
-    func testMacro() {
+final class MacrosTests {
+    @Test func macro() {
         assertMacroExpansion(
             """
             @AnandaInit
@@ -202,7 +203,7 @@ final class MacrosTests: XCTestCase {
         )
     }
 
-    func testComputedOrIgnoredProperties() {
+    @Test func computedOrIgnoredProperties() {
         assertMacroExpansion(
             """
             @AnandaInit
