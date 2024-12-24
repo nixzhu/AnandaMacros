@@ -74,8 +74,6 @@ public struct AnandaInitMacro: MemberMacro {
         let initializer = try InitializerDeclSyntax(
             .init(stringLiteral: "\(accessModifierHead)init(json: AnandaJSON)")
         ) {
-            ExprSyntax("\n    let json = json.withValueExtractor(Self.valueExtractor)")
-
             for (key, name, type) in list {
                 ExprSyntax("self.\(name) = \(raw: type.ananda(key: key))")
             }
@@ -104,7 +102,7 @@ extension TypeSyntax {
             case "Date":
                 return "\(json).date()"
             default:
-                return ".init(json: \(json))"
+                return ".decode(from: \(json))"
             }
         }
 
@@ -124,7 +122,7 @@ extension TypeSyntax {
                 case "Date":
                     return "\(json).dictionary().mapValues { $0.date() }"
                 default:
-                    return "\(json).dictionary().mapValues { .init(json: $0) }"
+                    return "\(json).dictionary().mapValues { .decode(from: $0) }"
                 }
             }
 
@@ -144,7 +142,7 @@ extension TypeSyntax {
                     case "Date":
                         return "\(json).dictionary().mapValues { $0.array().map { $0.date() } }"
                     default:
-                        return "\(json).dictionary().mapValues { $0.array().map { .init(json: $0) } }"
+                        return "\(json).dictionary().mapValues { $0.array().map { .decode(from: $0) } }"
                     }
                 }
             }
@@ -166,7 +164,7 @@ extension TypeSyntax {
                 case "Date":
                     return "\(json).array().map { $0.date() }"
                 default:
-                    return "\(json).array().map { .init(json: $0) }"
+                    return "\(json).array().map { .decode(from: $0) }"
                 }
             }
 
@@ -186,7 +184,7 @@ extension TypeSyntax {
                     case "Date":
                         return "\(json).array().map { $0.dictionary().mapValues { $0.date() } }"
                     default:
-                        return "\(json).array().map { $0.dictionary().mapValues { .init(json: $0) } }"
+                        return "\(json).array().map { $0.dictionary().mapValues { .decode(from: $0) } }"
                     }
                 }
 
@@ -206,7 +204,7 @@ extension TypeSyntax {
                         case "Date":
                             return "\(json).array().map { $0.dictionary().mapValues { $0.array().map { $0.date() } } }"
                         default:
-                            return "\(json).array().map { $0.dictionary().mapValues { $0.array().map { .init(json: $0) } } }"
+                            return "\(json).array().map { $0.dictionary().mapValues { $0.array().map { .decode(from: $0) } } }"
                         }
                     }
                 }
@@ -229,7 +227,7 @@ extension TypeSyntax {
                 case "Date":
                     return "\(json).date"
                 default:
-                    return "\(json).emptyAsNil.map { .init(json: $0) }"
+                    return "\(json).emptyAsNil.map { .decode(from: $0) }"
                 }
             }
 
@@ -249,7 +247,7 @@ extension TypeSyntax {
                     case "Date":
                         return "\(json).dictionary?.mapValues { $0.date() }"
                     default:
-                        return "\(json).dictionary?.mapValues { .init(json: $0) }"
+                        return "\(json).dictionary?.mapValues { .decode(from: $0) }"
                     }
                 }
 
@@ -269,7 +267,7 @@ extension TypeSyntax {
                         case "Date":
                             return "\(json).dictionary?.mapValues { $0.array().map { $0.date() } }"
                         default:
-                            return "\(json).dictionary?.mapValues { $0.array().map { .init(json: $0) } }"
+                            return "\(json).dictionary?.mapValues { $0.array().map { .decode(from: $0) } }"
                         }
                     }
                 }
@@ -291,7 +289,7 @@ extension TypeSyntax {
                     case "Date":
                         return "\(json).array?.map { $0.date() }"
                     default:
-                        return "\(json).array?.map { .init(json: $0) }"
+                        return "\(json).array?.map { .decode(from: $0) }"
                     }
                 }
 
@@ -311,7 +309,7 @@ extension TypeSyntax {
                         case "Date":
                             return "\(json).array?.map { $0.dictionary().mapValues { $0.date() } }"
                         default:
-                            return "\(json).array?.map { $0.dictionary().mapValues { .init(json: $0) } }"
+                            return "\(json).array?.map { $0.dictionary().mapValues { .decode(from: $0) } }"
                         }
                     }
 
@@ -331,7 +329,7 @@ extension TypeSyntax {
                             case "Date":
                                 return "\(json).array?.map { $0.dictionary().mapValues { $0.array().map { $0.date() } } }"
                             default:
-                                return "\(json).array?.map { $0.dictionary().mapValues { $0.array().map { .init(json: $0) } } }"
+                                return "\(json).array?.map { $0.dictionary().mapValues { $0.array().map { .decode(from: $0) } } }"
                             }
                         }
                     }

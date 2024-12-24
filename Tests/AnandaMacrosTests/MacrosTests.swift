@@ -63,7 +63,6 @@ final class MacrosTests {
                         let b12: [[String: [Int]]]?
 
                         init(json: AnandaJSON) {
-                            let json = json.withValueExtractor(Self.valueExtractor)
                             self.b1 = json["b1"].int()
                             self.b2 = json["b2"].int
                             self.b3 = json["b3"].array().map {
@@ -133,7 +132,6 @@ final class MacrosTests {
                     let c12: [[String: [Bob]]]?
 
                     init(json: AnandaJSON) {
-                        let json = json.withValueExtractor(Self.valueExtractor)
                         self.avatarURL = json["avatar_url"].url()
                         self.a1 = json["a1"].bool()
                         self.a2 = json["a2"].bool
@@ -143,53 +141,53 @@ final class MacrosTests {
                         self.a4 = json["a4"].array?.map {
                             $0.bool()
                         }
-                        self.c1 = .init(json: json["c1"])
+                        self.c1 = .decode(from: json["c1"])
                         self.c2 = json["c2"].emptyAsNil.map {
-                            .init(json: $0)
+                            .decode(from: $0)
                         }
                         self.c3 = json["c3"].array().map {
-                            .init(json: $0)
+                            .decode(from: $0)
                         }
                         self.c4 = json["c4"].array?.map {
-                            .init(json: $0)
+                            .decode(from: $0)
                         }
                         self.c5 = json["c5"].dictionary().mapValues {
-                            .init(json: $0)
+                            .decode(from: $0)
                         }
                         self.c6 = json["c6"].dictionary?.mapValues {
-                            .init(json: $0)
+                            .decode(from: $0)
                         }
                         self.c7 = json["c7"].dictionary().mapValues {
                             $0.array().map {
-                                .init(json: $0)
+                                .decode(from: $0)
                             }
                         }
                         self.c8 = json["c8"].dictionary?.mapValues {
                             $0.array().map {
-                                .init(json: $0)
+                                .decode(from: $0)
                             }
                         }
                         self.c9 = json["c9"].array().map {
                             $0.dictionary().mapValues {
-                                .init(json: $0)
+                                .decode(from: $0)
                             }
                         }
                         self.c10 = json["c10"].array?.map {
                             $0.dictionary().mapValues {
-                                .init(json: $0)
+                                .decode(from: $0)
                             }
                         }
                         self.c11 = json["c11"].array().map {
                             $0.dictionary().mapValues {
                                 $0.array().map {
-                                    .init(json: $0)
+                                    .decode(from: $0)
                                 }
                             }
                         }
                         self.c12 = json["c12"].array?.map {
                             $0.dictionary().mapValues {
                                 $0.array().map {
-                                    .init(json: $0)
+                                    .decode(from: $0)
                                 }
                             }
                         }
@@ -232,7 +230,6 @@ final class MacrosTests {
                     public var poster: URL?
 
                     public init(json: AnandaJSON) {
-                        let json = json.withValueExtractor(Self.valueExtractor)
                         self.trakt = json["trakt"].int()
                         self.slug = json["slug"].string
                         self.tvdb = json["tvdb"].int
@@ -272,7 +269,7 @@ struct IndieApp: AnandaModel {
 struct Mastodon: AnandaModel {
     @AnandaInit
     struct Profile: AnandaModel {
-        enum Gender: String {
+        enum Gender: String, AnandaModel {
             case unknown
             case male
             case female
