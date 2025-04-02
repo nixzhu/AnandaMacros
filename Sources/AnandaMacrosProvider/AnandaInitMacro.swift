@@ -81,6 +81,15 @@ public struct AnandaInitMacro: MemberMacro {
 
         return [DeclSyntax(initializer)]
     }
+
+    public static func expansion(
+        of node: AttributeSyntax,
+        providingMembersOf declaration: some DeclGroupSyntax,
+        conformingTo protocols: [TypeSyntax],
+        in context: some MacroExpansionContext
+    ) throws -> [DeclSyntax] {
+        try expansion(of: node, providingMembersOf: declaration, in: context)
+    }
 }
 
 extension TypeSyntax {
