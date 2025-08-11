@@ -1,4 +1,4 @@
-// swift-tools-version: 5.10
+// swift-tools-version: 6.0
 
 import PackageDescription
 import CompilerPluginSupport
@@ -22,11 +22,11 @@ let package = Package(
     dependencies: [
         .package(
             url: "https://github.com/nixzhu/Ananda.git",
-            from: "1.0.0"
+            from: "1.1.0"
         ),
         .package(
             url: "https://github.com/swiftlang/swift-syntax.git",
-            "510.0.0"..<"602.0.0"
+            from: "600.0.0"
         ),
     ],
     targets: [
@@ -51,9 +51,6 @@ let package = Package(
                     name: "Ananda",
                     package: "Ananda"
                 ),
-            ],
-            swiftSettings: [
-                .enableExperimentalFeature("StrictConcurrency"),
             ]
         ),
         .testTarget(
