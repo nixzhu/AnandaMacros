@@ -22,11 +22,11 @@ let package = Package(
     dependencies: [
         .package(
             url: "https://github.com/nixzhu/Ananda.git",
-            from: "1.1.0"
+            from: "1.2.0"
         ),
         .package(
             url: "https://github.com/swiftlang/swift-syntax.git",
-            from: "600.0.0"
+            "600.0.0"..<"603.0.0"
         ),
     ],
     targets: [
